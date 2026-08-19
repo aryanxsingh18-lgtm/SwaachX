@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwaachX - Smart Waste Management Platform</title>
+    <link rel="icon" type="image/jpeg" href="assets/swaachx-logo.jpg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-slate-900 border-r border-slate-700/60 text-slate-100 min-h-screen flex flex-col lg:flex-row"><div class="tt-civic-stripe fixed top-0 left-0 right-0 z-50"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full lg:w-64 bg-slate-950 border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col justify-between shrink-0">
+
+        <div class="p-6">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 mb-8">
+                <div class="shrink-0">
+                    <img src="assets/swaachx-logo.jpg" alt="SwaachX logo" class="swaachx-logo">
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">SwaachX</h1>
+                    <p class="text-xs text-emerald-400 font-medium">Smart City Clean Up</p>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="space-y-1">
+                <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+
+                    </svg>
+                    Main Dashboard
+                </button>
+                <button onclick="switchTab('citizen')" id="nav-citizen" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all text-slate-400 hover:bg-slate-900 hover:text-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375A1.125 1.125 0 012.25 20.25V3.75c0-.621.504-1.125 1.125-1.125H12v4.5z" />
+                    </svg>
+                    Trash Reports
+                </button>
+                <button onclick="switchTab('fleet')" id="nav-fleet" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all text-slate-400 hover:bg-slate-900 hover:text-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.129-1.125V11.25c0-.447-.266-.852-.678-1.03l-2.452-1.054A2.25 2.25 0 0015.75 9H13.5V3.75c0-.621-.504-1.125-1.125-1.125h-2.25A1.125 1.125 0 009 3.75V9H3.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 2h7.5M12 9.75v1.5M12 14.25v-1.5" />
+                    </svg>
+                    Track Trucks
+                </button>
+                <button onclick="switchTab('optimization')" id="nav-optimization" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all text-slate-400 hover:bg-slate-900 hover:text-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+
+                    Smart Routes
+                </button>
+            </nav>
+        </div>
+
+        <!-- Global Goals Section -->
+        <div class="p-6 border-t border-slate-800 bg-slate-950/50 space-y-3">
+            <div class="text-xs font-semibold tracking-wider text-slate-500 uppercase">UN Global Goals</div>
+            <div class="flex items-center gap-3 bg-cyan-950/40 border border-cyan-800/40 p-2.5 rounded-xl">
+                <span class="text-cyan-400 text-xs font-bold bg-cyan-950 border border-cyan-700 px-1.5 py-0.5 rounded">11</span>
+                <span class="text-xs text-slate-300 font-medium">Sustainable Cities</span>
+            </div>
+            <div class="flex items-center gap-3 bg-amber-950/40 border border-amber-800/40 p-2.5 rounded-xl">
+                <span class="text-amber-400 text-xs font-bold bg-amber-950 border border-amber-700 px-1.5 py-0.5 rounded">12</span>
+                <span class="text-xs text-slate-300 font-medium">Responsible Clean Up</span>
+            </div>
+        </div>
+    </aside>
+
+
+    <!-- Main Workspace Container -->
+    <main class="flex-1 p-4 lg:p-8 overflow-y-auto custom-scrollbar max-w-7xl mx-auto w-full space-y-8">
+        
+        <!-- Quick Stats Counters -->
+        <header class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-slate-950 border border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Reports From People</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span id="stat-reports" class="text-3xl font-bold text-white tracking-tight">42</span>
+                    <span class="text-xs text-emerald-400 font-medium">+12 today</span>
+                </div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Trucks Working</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-3xl font-bold text-white tracking-tight">8<span class="text-slate-500 text-lg font-normal">/10</span></span>
+                    <span class="text-xs text-cyan-400 font-medium">80% active</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-950 border border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Fuel Saved by AI</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span id="stat-efficiency" class="text-3xl font-bold text-emerald-400 tracking-tight">24.2%</span>
+                    <span class="text-xs text-slate-400 font-medium">Saved so far</span>
+                </div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Overfilled Area Risk</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-3xl font-bold text-amber-400 tracking-tight">Low</span>
+                    <span class="text-xs text-amber-400 font-medium">3 under watch</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Pop-up Notice Box -->
+        <div id="action-notification" class="hidden bg-emerald-950/60 border border-emerald-800 text-emerald-300 px-6 py-4 rounded-2xl flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+
+                <div class="bg-emerald-900 text-emerald-300 p-1.5 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <p id="notification-text" class="text-sm font-medium"></p>
+            </div>
+            <button onclick="closeNotification()" class="text-emerald-500 hover:text-emerald-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- TAB 1: MAIN DASHBOARD -->
+        <section id="tab-overview" class="tab-content space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Live Waste and Truck Map -->
+                <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-3xl p-6 flex flex-col">
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-white tracking-tight">Live Waste & Truck Map</h2>
+                            <p class="text-xs text-slate-400">Real-time updates on garbage trucks and reported issues</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full pulse-dot"></span>
+                                Map is Live
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map Layout -->
+                    <div class="relative bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden aspect-[16/9] flex items-center justify-center p-4">
+                        <svg id="urban-matrix-svg" class="w-full h-full text-slate-800 opacity-90" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Map Grids -->
+                            <defs>
+                                <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+
+                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(51, 65, 85, 0.25)" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+                            
+                            <!-- City Streets -->
+                            <path d="M 50,150 L 750,150 M 50,300 L 750,300 M 200,50 L 200,400 M 450,50 L 450,400 M 650,50 L 650,400" fill="none" stroke="rgba(71, 85, 105, 0.4)" stroke-width="4" stroke-dasharray="4 4" />
+                            <path d="M 50,150 L 750,150 M 50,300 L 750,300 M 200,50 L 200,400 M 450,50 L 450,400 M 650,50 L 650,400" fill="none" stroke="rgba(51, 65, 85, 0.6)" stroke-width="2" />
+                            
+                            <!-- Busy Trash Spots -->
+                            <circle cx="200" cy="150" r="35" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.2)" stroke-width="1" />
+                            <circle cx="200" cy="150" r="4" fill="#f59e0b" />
+                            <text x="210" y="145" fill="#f59e0b" font-size="10" font-weight="600">Busy Area A</text>
+
+                            <circle cx="450" cy="300" r="45" fill="rgba(239, 68, 68, 0.08)" stroke="rgba(239, 68, 68, 0.2)" stroke-width="1" />
+                            <circle cx="450" cy="300" r="4" fill="#ef4444" />
+                            <text x="460" y="295" fill="#ef4444" font-size="10" font-weight="600">Area B (Overfilled)</text>
+
+                            <!-- Moving Trucks -->
+
+                            <g id="truck-asset-1" transform="translate(100, 150)">
+                                <circle r="14" fill="rgba(16, 185, 129, 0.15)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1"/>
+                                <rect x="-6" y="-6" width="12" height="12" rx="2" fill="#10b981" />
+                                <text x="10" y="-10" fill="#a7f3d0" font-size="9" font-weight="bold">TRUCK-01</text>
+                            </g>
+
+                            <g id="truck-asset-2" transform="translate(450, 100)">
+                                <circle r="14" fill="rgba(6, 182, 212, 0.15)" stroke="rgba(6, 182, 212, 0.4)" stroke-width="1"/>
+                                <rect x="-6" y="-6" width="12" height="12" rx="2" fill="#06b6d4" />
+                                <text x="10" y="-10" fill="#cffafe" font-size="9" font-weight="bold">TRUCK-02</text>
+                            </g>
+
+                            <!-- User Reports Layer -->
+                            <g id="map-reports-layer"></g>
+                        </svg>
+
+                        <!-- Map Explanations (Legend) -->
+                        <div class="absolute bottom-3 left-3 bg-slate-950/90 backdrop-blur border border-slate-800 p-3 rounded-xl text-xs space-y-1.5 shadow-xl">
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-sm"></span> <span class="text-slate-300">Truck 01 (Food Waste)</span></div>
+
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-cyan-500 rounded-sm"></span> <span class="text-slate-300">Truck 02 (Recycling)</span></div>
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-amber-500 rounded-full"></span> <span class="text-slate-300">Filling Up Soon</span></div>
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-rose-500 rounded-full"></span> <span class="text-slate-300">Already Overfilled / Spill</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Easy Citizen Issue Reporting Form -->
+                <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="p-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-bold text-white tracking-tight">Report a Trash Issue</h2>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-6">Help keep the neighborhood clean. Report full trash bins or dumped items instantly.</p>
+
+
+                        <form id="quick-report-form" onsubmit="handleReportSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">What is the problem?</label>
+                                <select id="form-category" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition-colors">
+                                    <option value="Overfilled Public Bin">Overfilled Public Bin</option>
+                                    <option value="Electronic Waste / Batteries">Electronic Waste / Batteries</option>
+                                    <option value="Illegal Street Dumping">Illegal Street Dumping</option>
+                                    <option value="Dangerous / Toxic Liquids">Dangerous / Toxic Liquids</option>
+                                    <option value="Smelly Food Trash Pile">Smelly Food Trash Pile</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Map Location (X)</label>
+                                    <input type="number" id="form-coord-x" min="50" max="750" value="300" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Map Location (Y)</label>
+
+                                    <input type="number" id="form-coord-y" min="50" max="400" value="200" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">How urgent is it?</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <label class="border border-slate-800 bg-slate-900/50 rounded-xl p-2.5 text-center cursor-pointer block hover:border-slate-700 transition-colors">
+                                        <input type="radio" name="form-urgency" value="Standard" checked class="sr-only peer">
+                                        <span class="text-xs font-medium text-slate-400 peer-checked:text-emerald-400 block">Normal</span>
+                                    </label>
+                                    <label class="border border-slate-800 bg-slate-900/50 rounded-xl p-2.5 text-center cursor-pointer block hover:border-slate-700 transition-colors">
+                                        <input type="radio" name="form-urgency" value="Elevated" class="sr-only peer">
+                                        <span class="text-xs font-medium text-slate-400 peer-checked:text-amber-400 block">Medium</span>
+                                    </label>
+                                    <label class="border border-slate-800 bg-slate-900/50 rounded-xl p-2.5 text-center cursor-pointer block hover:border-slate-700 transition-colors">
+                                        <input type="radio" name="form-urgency" value="Critical" class="sr-only peer">
+                                        <span class="text-xs font-medium text-slate-400 peer-checked:text-rose-400 block">Urgent</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Extra Details</label>
+                                <textarea id="form-notes" rows="2" placeholder="Tell us exactly where it is or give bin number..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 transition-colors"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold text-sm py-3 rounded-xl shadow-lg transition-colors mt-2 flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                                Send Trash Report
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Dashboard Analytics Bottom Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Areas Expected to Fill Up Soon Graph -->
+                <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-sm font-bold text-white tracking-tight uppercase">Areas Expected to Fill Up Soon</h3>
+                            <p class="text-xs text-slate-500">Smart system predicting where trash will pile up over the weekend</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar Representation -->
+                    <div class="space-y-3.5 mt-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-300">Neighborhood A (Apartment Area)</span>
+                                <span class="text-amber-400 font-semibold">82% Full Risk</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+
+                                <div class="bg-amber-500 h-2.5 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-300">Neighborhood B (Market & Restaurants)</span>
+                                <span class="text-rose-400 font-semibold">94% Full Risk</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-rose-500 h-2.5 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-300">Neighborhood C (Factories / Industrial)</span>
+                                <span class="text-emerald-400 font-semibold">41% Full Risk</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-emerald-500 h-2.5 rounded-full" style="width: 41%"></div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-300">Neighborhood D (Public Parks)</span>
+                                <span class="text-cyan-400 font-semibold">65% Full Risk</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Routing Optimization Matrix Control -->
+                <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h3 class="text-sm font-bold text-white tracking-tight uppercase">AI Route Finder</h3>
+
+                            <p class="text-xs text-slate-400">Calculates the best paths for trucks to save fuel and time.</p>
+                        </div>
+                        <button onclick="runRouteOptimization()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-slate-950 text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5 shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l-3 3m3-3l3 3" />
+                            </svg>
+                            Find Best Routes Now
+                        </button>
+                    </div>
+
+                    <!-- Comparison cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2">
+                        <div class="bg-slate-900 border border-slate-800/60 p-4 rounded-2xl">
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2">Regular Route</span>
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between text-xs text-slate-400">Total Distance: <span class="text-white font-medium">142.4 km</span></div>
+                                <div class="flex justify-between text-xs text-slate-400">Fuel Needed: <span class="text-white font-medium">58.2 Liters</span></div>
+                                <div class="flex justify-between text-xs text-slate-400">CO2 Gas Produced: <span class="text-white font-medium">152.8 kg CO2</span></div>
+                            </div>
+
+                        </div>
+
+                        <div class="bg-emerald-950/20 border border-emerald-800/40 p-4 rounded-2xl relative overflow-hidden">
+                            <div class="absolute -right-6 -bottom-6 text-emerald-500/5">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-24 h-24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                </svg>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block mb-2">Smart AI Route</span>
+                            <div class="space-y-1.5 z-10 relative">
+                                <div class="flex justify-between text-xs text-slate-400">Total Distance: <span id="opt-distance" class="text-emerald-400 font-bold">107.8 km</span></div>
+                                <div class="flex justify-between text-xs text-slate-400">Fuel Needed: <span id="opt-fuel" class="text-emerald-400 font-bold">44.1 Liters</span></div>
+                                <div class="flex justify-between text-xs text-slate-400">CO2 Gas Produced: <span id="opt-carbon" class="text-emerald-400 font-bold">115.8 kg CO2</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress loading bar -->
+                    <div id="optimization-loader" class="hidden mt-4 pt-2 border-t border-slate-900">
+
+                        <div class="flex justify-between text-xs text-cyan-400 font-semibold mb-1">
+                            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-cyan-400 rounded-full pulse-dot"></span> Finding the best paths...</span>
+                            <span id="opt-progress-text">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div id="opt-progress-bar" class="bg-cyan-500 h-1.5 rounded-full transition-all duration-100" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: DETAILED RECENT TRASH REPORTS -->
+        <section id="tab-citizen" class="tab-content hidden space-y-6">
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-white tracking-tight">Recent Trash Reports</h2>
+                        <p class="text-xs text-slate-400">List of issues reported by people in the neighborhood.</p>
+
+                    </div>
+                    <!-- Filter tags -->
+                    <div class="flex gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+                        <button onclick="filterReports('All')" id="filter-all" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white font-medium">All Reports</button>
+                        <button onclick="filterReports('Critical')" id="filter-critical" class="px-3 py-1.5 rounded-lg text-slate-400 font-medium hover:text-white">Urgent</button>
+                        <button onclick="filterReports('Standard')" id="filter-standard" class="px-3 py-1.5 rounded-lg text-slate-400 font-medium hover:text-white">Normal</button>
+                    </div>
+                </div>
+
+                <!-- Log Table -->
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left text-sm whitespace-nowrap">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                                <th class="pb-3.5 pl-2">Report ID</th>
+                                <th class="pb-3.5">Issue Type</th>
+                                <th class="pb-3.5">Map Location</th>
+                                <th class="pb-3.5">How Urgent</th>
+                                <th class="pb-3.5">Status</th>
+
+                                <th class="pb-3.5 text-right pr-2">Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="citizen-reports-tbody" class="divide-y divide-slate-900 text-slate-300">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: LIVE TRUCK TRACKING -->
+        <section id="tab-fleet" class="tab-content hidden space-y-6">
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-white tracking-tight">Live Garbage Truck Tracking</h2>
+                        <p class="text-xs text-slate-400">See where collection trucks are driving right now.</p>
+                    </div>
+
+                </div>
+
+                <!-- Telemetry Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="fleet-telemetry-grid">
+                    <!-- Injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: SMART ROUTE AI FINDER MODAL -->
+        <section id="tab-optimization" class="tab-content hidden space-y-6">
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 text-center max-w-2xl mx-auto py-12">
+                <div class="w-16 h-16 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21l8.904-4.43m-8.904-.666L12 10.5m4.5-3V3m0 3h3m-3 0H12m-2.25 13.5h.008v.008h-.008v-.008z" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold text-white tracking-tight mb-2">Smart Route AI Finder</h2>
+                <p class="text-slate-400 text-sm mb-6 max-w-md mx-auto">This tool calculates fuel-saving paths for clean-up trucks based on which public trash cans are already full.</p>
+
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6 text-left space-y-4">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active System Details</h3>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80"><span class="text-slate-500 block mb-1">System Type</span>Smart Path Finder v4.2</div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80"><span class="text-slate-500 block mb-1">Calculation Speed</span>Fast (0.02ms)</div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80"><span class="text-slate-500 block mb-1">Connected Smart Bins</span>34 Bins Syncing Data</div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80"><span class="text-slate-500 block mb-1">Global Target Goals</span>SDG 11 & SDG 12 Compliance</div>
+                    </div>
+                </div>
+
+                <button onclick="runRouteOptimization()" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-sm rounded-xl transition-all shadow-lg inline-flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    Refresh Smart Routes
+                </button>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Interactive Logic State JavaScript Engines -->
+    <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SwaachX - Smart Waste Management and Citizen Reporting Platform">
+    <title>SwaachX - Smart Waste Management Platform</title>
+    <link rel="icon" type="image/jpeg" href="assets/swaachx-logo.jpg">
+    <!-- Tailwind CSS Whitelisted Import -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="p-0 sm:p-4 md:p-8 flex flex-col items-center justify-center min-h-screen text-slate-800">
+<div class="tt-gov-strip" aria-hidden="true"></div>
+
+    <!-- Premium Core Smartphone Viewport Canvas Container Wrapper -->
+    <div class="w-full max-w-md bg-[#FFFFFF] min-h-[850px] shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative flex flex-col rounded-none sm:rounded-[48px] border border-slate-200/60">
+        
+
+        
+        <div class="px-6 pt-6 pb-3 flex items-center justify-between z-50 bg-[#FFFFFF]/90 backdrop-blur-md border-b border-slate-900">
+            <div class="flex items-center gap-2.5">
+                <img src="assets/swaachx-logo.jpg" alt="SwaachX logo" class="swaachx-logo-sm">
+                <h1 class="text-sm font-black tracking-widest text-slate-700 uppercase">SwaachX <span class="text-xs font-medium text-slate-500 lowercase px-1.5 py-0.5 rounded bg-white border border-slate-200 ml-1">v1.0</span></h1>
+            </div>
+            
+            <!-- Contextual Operational Environment Toggle Button -->
+            <div class="flex bg-slate-50 rounded-full p-1 border border-slate-200/80 text-[10px] font-bold tracking-wide">
+                <button onclick="switchSystemRole('citizen')" id="role-tab-citizen" class="px-3.5 py-1.5 rounded-full text-slate-900 bg-slate-100 shadow-md transition-all">
+                    Citizen
+                </button>
+                <button onclick="switchSystemRole('driver')" id="role-tab-driver" class="px-3.5 py-1.5 rounded-full text-slate-500 transition-all">
+                    Collection Ops
+                </button>
+            </div>
+        </div>
+
+        <!-- System Notification Banner Slide Layer -->
+
+        <div id="toast-hub-alert" class="absolute top-20 left-4 right-4 glass-panel bg-slate-50/95 p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-teal-500/30 flex items-start gap-3.5 transform -translate-y-36 opacity-0 pointer-events-none transition-all duration-500 cubic-bezier(0.2, 1, 0.2, 1) z-50">
+            <div class="bg-teal-500/10 text-teal-400 p-2 rounded-xl border border-teal-500/20 shrink-0" id="toast-vector-icon">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h4 class="font-bold text-xs text-slate-900 tracking-tight" id="toast-headline">Action Complete</h4>
+                <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed truncate" id="toast-subtext"></p>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- CORE ARCHITECTURE: CITIZEN MULTI-TAB VIEW  -->
+        <!-- ========================================== -->
+        <div id="view-citizen-group" class="flex-1 flex flex-col justify-between overflow-hidden">
+            
+            <!-- Citizen Modular Sub-view Containers Stack -->
+            <div class="flex-1 overflow-y-auto no-scrollbar pb-24 p-6 space-y-6">
+                
+                <!-- SUB-TAB 1: CITIZEN HOME (DEFAULT ACTIVE) -->
+
+                <div id="subview-citizen-home" class="space-y-6">
+                    <!-- Profile Impact Metrics Panel Header -->
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span id="offline-queue-badge" class="text-[9px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded mb-1.5 inline-block hidden">Sync Queue Active</span>
+                            <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Welcome back, Citizen</h2>
+                            <h3 class="text-lg font-black text-slate-900 mt-0.5 tracking-tight">Maya Lin</h3>
+                        </div>
+                        <div class="glass-card-emerald px-4 py-2.5 rounded-2xl text-right shadow-inner">
+                            <span class="block text-xl font-black text-teal-400 tracking-tighter leading-none" id="lbl-citizen-points">1,240</span>
+                            <span class="text-[9px] uppercase font-bold tracking-widest text-teal-500 mt-1 block">CivicPoints Bal</span>
+                        </div>
+                    </div>
+
+                    <!-- Clean Quick Action Banner Hub Trigger -->
+                    <div onclick="toggleOpticalLens(true)" class="glass-card-emerald rounded-2xl p-4 flex items-center justify-between cursor-pointer border border-teal-500/20 hover:border-teal-500/40 transition-all duration-300">
+                        <div class="max-w-[75%]">
+                            <h4 class="font-bold text-xs text-teal-400 uppercase tracking-wider">Smart Waste Report</h4>
+                            <p class="text-xs text-slate-600 mt-1 leading-relaxed">Point camera at waste hazards. AI classifies type & geolocates instantly.</p>
+
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-teal-500 text-slate-950 flex items-center justify-center font-bold text-lg shadow-lg">📷</div>
+                    </div>
+
+                    <!-- Stream Container Timeline List Feed Grid -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Reported Waste Issues</h4>
+                            <span class="text-[10px] text-slate-500 font-medium">Auto-refreshing</span>
+                        </div>
+                        <div id="citizen-incident-list" class="space-y-2.5">
+                            <!-- Dynamic Incident Rows Injected via Loop Array State -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-TAB 2: COMMUNITY REWARDS MARKETPLACE -->
+                <div id="subview-citizen-market" class="space-y-4 hidden">
+                    <div>
+
+                        <h3 class="text-base font-extrabold text-slate-900 tracking-tight">Civic Rewards</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Use earned CivicPoints for zero-emission infrastructure benefits.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-3" id="rewards-marketplace-grid">
+                        <!-- Rewards Catalog Template Cards Injected Here -->
+                    </div>
+                </div>
+
+                <!-- SUB-TAB 3: GOVERNANCE & METRICS INSIGHTS (SDG ALIGNMENT) -->
+                <div id="subview-citizen-insights" class="space-y-5 hidden">
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900 tracking-tight">SDG Accountabilities</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Real-time local municipal sanitation vectors tracking data parameters.</p>
+                    </div>
+
+                    <!-- SDG 11 & 12 Analytic Progress Visual Infographic Cards -->
+                    <div class="grid grid-cols-2 gap-3.5">
+                        <div class="glass-panel p-4 rounded-2xl border border-slate-200 text-center relative overflow-hidden">
+
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-amber-500"></div>
+                            <span class="text-xl block">🏙️</span>
+                            <h4 class="text-xs font-bold text-slate-600 mt-2">SDG 11 Status</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Sustainable Cities</p>
+                            <span class="block text-lg font-black text-amber-400 mt-2">84.2%</span>
+                            <span class="text-[9px] text-teal-400 bg-teal-500/5 border border-teal-500/10 px-1.5 py-0.5 rounded mt-1 inline-block">+4.2% MoM</span>
+                        </div>
+                        <div class="glass-panel p-4 rounded-2xl border border-slate-200 text-center relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-teal-500"></div>
+                            <span class="text-xl block">🔄</span>
+                            <h4 class="text-xs font-bold text-slate-600 mt-2">SDG 12 Status</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Responsible Consump.</p>
+                            <span class="block text-lg font-black text-teal-400 mt-2">1.8 Tons</span>
+                            <span class="text-[9px] text-slate-400 bg-white px-1.5 py-0.5 rounded mt-1 inline-block">Plastic Diverted</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Analytics Metric Graph Representation Container -->
+                    <div class="glass-panel rounded-2xl p-4 space-y-3.5">
+
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold text-slate-600 tracking-wide uppercase">Waste Deflection Vector Cycles</h4>
+                            <span class="text-[9px] font-mono text-slate-500">Aug 2026</span>
+                        </div>
+                        <!-- Mock Chart Columns Node Arrays -->
+                        <div class="flex items-end justify-between h-28 pt-4 px-2">
+                            <div class="w-7 bg-slate-100 rounded-t-md h-[40%] flex flex-col justify-end items-center"><span class="text-[8px] text-slate-500 mb-1">W1</span></div>
+                            <div class="w-7 bg-slate-100 rounded-t-md h-[55%] flex flex-col justify-end items-center"><span class="text-[8px] text-slate-500 mb-1">W2</span></div>
+                            <div class="w-7 bg-teal-500/50 rounded-t-md h-[78%] flex flex-col justify-end items-center border-t border-teal-400 shadow-[0_0_10px_rgba(16,185,129,0.2)]"><span class="text-[8px] text-teal-300 font-bold mb-1">W3</span></div>
+                            <div class="w-7 bg-slate-100 rounded-t-md h-[62%] flex flex-col justify-end items-center"><span class="text-[8px] text-slate-500 mb-1">W4</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Absolute Fixed Glass Navigation Bottom Utility Bar Menu Component -->
+            <div class="absolute bottom-0 left-0 right-0 glass-panel bg-slate-50/80 border-t border-slate-900 rounded-t-3xl py-3 px-8 flex items-center justify-between z-40">
+                <button onclick="navToCitizenSubview('home')" id="nav-item-home" class="flex flex-col items-center gap-1 text-teal-400 group transition-all">
+
+                    <span class="text-lg group-hover:scale-110 transition-transform">🏠</span>
+                    <span class="text-[10px] font-bold tracking-tight">Home</span>
+                </button>
+                <button onclick="navToCitizenSubview('market')" id="nav-item-market" class="flex flex-col items-center gap-1 text-slate-500 group transition-all">
+                    <span class="text-lg group-hover:scale-110 transition-transform">🎟️</span>
+                    <span class="text-[10px] font-bold tracking-tight">Rewards</span>
+                </button>
+                <button onclick="navToCitizenSubview('insights')" id="nav-item-insights" class="flex flex-col items-center gap-1 text-slate-500 group transition-all">
+                    <span class="text-lg group-hover:scale-110 transition-transform">📊</span>
+                    <span class="text-[10px] font-bold tracking-tight">Analytics</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: FULL OPTICAL SCANNERS OVERLAYS     -->
+        <!-- ========================================== -->
+        <div id="view-camera-overlay" class="absolute inset-0 bg-slate-50 z-50 hidden flex-col justify-between">
+            
+
+            <div class="relative flex-1 bg-white flex items-center justify-center overflow-hidden">
+                <!-- Virtual Environment Lens Frame Viewfinder Box Container -->
+                <div id="lens-feed-background" class="w-full h-full bg-cover bg-center flex flex-col justify-between p-6 transition-all duration-500" style="background-image: url('https://placehold.co/600x800/020617/ffffff?text=Initializing+Sensor+Feed');">
+                    
+                    <div class="flex justify-between items-center w-full">
+                        <button onclick="toggleOpticalLens(false)" class="bg-slate-50/80 text-slate-900 p-3 rounded-full border border-slate-200 backdrop-blur-md hover:bg-white transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                        <!-- Simulated Network State Connection Toggle Link -->
+                        <button onclick="toggleSimulatedNetworkState()" id="btn-network-toggle" class="bg-teal-500/10 text-teal-400 text-[9px] font-extrabold tracking-widest uppercase px-3 py-1.5 rounded-full border border-teal-500/30 backdrop-blur-md">
+                            Network: Online
+                        </button>
+                    </div>
+
+                    <!-- AI Target Scanning Crosshair Box Wrapper -->
+                    <div id="lens-crosshair-bracket" class="w-60 h-60 border-2 border-dashed border-teal-500/30 relative mx-auto rounded-[32px] flex items-center justify-center bg-teal-500/5 backdrop-blur-[0.5px]">
+                        <!-- High Visibility Corner Accents -->
+                        <div class="absolute -top-1 -left-1 w-5 h-5 border-t-4 border-l-4 border-teal-400 rounded-tl-lg"></div>
+                        <div class="absolute -top-1 -right-1 w-5 h-5 border-t-4 border-r-4 border-teal-400 rounded-tr-lg"></div>
+
+                        <div class="absolute -bottom-1 -left-1 w-5 h-5 border-b-4 border-l-4 border-teal-400 rounded-bl-lg"></div>
+                        <div class="absolute -bottom-1 -right-1 w-5 h-5 border-b-4 border-r-4 border-teal-400 rounded-br-lg"></div>
+                        
+                        <div class="scanner-beam absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-teal-400 to-transparent shadow-[0_0_12px_#0B7A5A]"></div>
+                        <span class="text-[9px] uppercase font-black tracking-widest text-teal-300 bg-slate-50/90 px-3 py-1.5 rounded-full border border-teal-500/20 shadow-xl">Align Target Node</span>
+                    </div>
+
+                    <!-- Camera Trigger Activation Core Row -->
+                    <div class="flex justify-center" id="shutter-trigger-frame">
+                        <button onclick="executeLensPhotoCapture()" class="action-shutter-btn w-20 h-20 rounded-full border-4 border-white/20 bg-white/10 p-1.5 flex items-center justify-center transition-all active:scale-95 shadow-2xl">
+                            <div class="w-full h-full rounded-full bg-slate-100 shadow-xl"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contextual Post-Capture Computer Vision Categorization Analysis Sheet Module -->
+            <div id="lens-inference-sheet" class="glass-panel bg-[#FFFFFF] border-t border-slate-200 p-6 space-y-4 max-h-[55%] overflow-y-auto hidden">
+                <div class="flex justify-between items-start">
+
+                    <div>
+                        <span class="text-[9px] text-teal-400 font-extrabold uppercase tracking-widest block">SwaachX AI</span>
+                        <h3 class="text-base font-black text-slate-900 mt-0.5">Waste Classification</h3>
+                    </div>
+                    <span class="bg-teal-500/10 text-teal-400 text-[10px] font-mono font-bold px-2.5 py-1 rounded border border-teal-500/20">98.2% Match</span>
+                </div>
+
+                <!-- Segregation AI Sorting Pill Array Matrix Tags Buttons -->
+                <div class="space-y-2">
+                    <label class="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">Inferred Material Classification Group</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="updateStagedCategory('Plastic Overflow Pile', 'btn-chip-1')" id="btn-chip-1" class="p-3 rounded-xl text-xs font-bold text-left transition-all border bg-teal-500/10 border-teal-500 text-teal-400">
+                            Plastic / Recyclable
+                        </button>
+                        <button onclick="updateStagedCategory('Bio-Waste Overflow', 'btn-chip-2')" id="btn-chip-2" class="p-3 rounded-xl text-xs font-bold text-left transition-all border bg-white border-slate-200/80 text-slate-500">
+                            Organic Waste
+                        </button>
+                        <button onclick="updateStagedCategory('E-Waste Dumping Cluster', 'btn-chip-3')" id="btn-chip-3" class="p-3 rounded-xl text-xs font-bold text-left transition-all border bg-white border-slate-200/80 text-slate-500">
+                            E-Waste / Hazardous
+
+                        </button>
+                        <button onclick="updateStagedCategory('Bulky Material Accumulation', 'btn-chip-4')" id="btn-chip-4" class="p-3 rounded-xl text-xs font-bold text-left transition-all border bg-white border-slate-200/80 text-slate-500">
+                            Bulky Waste
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Telemetry Extraction String Readout Panel -->
+                <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-900 flex items-center gap-3">
+                    <span class="text-lg">📍</span>
+                    <div class="min-w-0 flex-1">
+                        <span class="block text-[9px] font-bold text-slate-500 uppercase tracking-widest leading-none">Extracted Geospatial Registry String</span>
+                        <span id="lbl-extracted-address-string" class="text-xs font-medium text-slate-600 mt-1 block truncate">Resolving location array tokens...</span>
+                    </div>
+                </div>
+
+                <!-- Interface Pipeline Actions Row Footer Execution Buttons -->
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                    <button onclick="revertLensToViewfinder()" class="w-full bg-white hover:bg-slate-100 text-slate-400 font-extrabold text-xs uppercase tracking-wider p-3.5 rounded-xl transition-all border border-slate-200">
+
+                        Retake Lens
+                    </button>
+                    <button onclick="commitIncidentReportSubmission()" class="w-full bg-teal-600 hover:bg-teal-500 text-slate-900 font-extrabold text-xs uppercase tracking-wider p-3.5 rounded-xl transition-all shadow-xl tracking-widest">
+                        Submit Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- CORE ARCHITECTURE: SANITATION OPERATIONS   -->
+        <!-- ========================================== -->
+        <div id="view-driver-group" class="flex-1 flex flex-col justify-between overflow-hidden hidden bg-[#F5FEFF]">
+            
+            <!-- Map Rendering Container Deck with Vector Path Layers -->
+            <div class="flex-1 relative flex flex-col justify-between">
+                
+                <!-- Background Vector GIS System Simulation Drawing Canvas -->
+                <div class="absolute inset-0 z-0 opacity-40 p-4 flex items-center justify-center select-none">
+
+                    <svg class="w-full h-full text-slate-900" viewBox="0 0 360 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 40 H350 M10 120 H350 M10 220 H350 M60 10 V290 M180 10 V290 M300 10 V290" stroke="#E2F4F6" stroke-width="16" stroke-linecap="round" />
+                        <path d="M10 40 H350 M10 120 H350 M10 220 H350 M60 10 V290 M180 10 V290 M300 10 V290" stroke="#B9DDE2" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" />
+                        
+                        <!-- Optimization algorithm track line segment link coordinates -->
+                        <path id="route-trajectory-vector" d="M60 40 V120 H180 V220 H300" stroke="#1D4ED8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                        
+                        <!-- Operational Spatial Coordinates Nodes Pins -->
+                        <circle cx="180" cy="120" r="10" fill="#ef4444" class="animate-pulse opacity-30" id="map-target-node-ping" />
+                        <circle cx="180" cy="120" r="6" fill="#ef4444" id="map-target-node-core" />
+                        <circle cx="60" cy="40" r="6" fill="#0B7A5A" />
+
+                        <!-- MACHINE LEARNING PREDICTIVE HOTSPOTS CLUSTER LAYER NODES (DYNAMIC DISPLAY OVERLAY) -->
+                        <g id="ml-hotspots-group" class="hidden">
+                            <!-- Hotspot 1 -->
+                            <circle cx="300" cy="40" r="14" fill="#E58B00" class="opacity-20 animate-pulse" />
+                            <circle cx="300" cy="40" r="5" fill="#E58B00" />
+                            <!-- Hotspot 2 -->
+                            <circle cx="60" cy="220" r="14" fill="#E58B00" class="opacity-20 animate-pulse" />
+
+                            <circle cx="60" cy="220" r="5" fill="#E58B00" />
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Operations Map Interactive Overlay Management Head-Up Card -->
+                <div class="z-10 p-4 w-full space-y-2">
+                    <div class="glass-panel bg-slate-50/95 rounded-2xl p-4 flex items-center justify-between border border-slate-900 shadow-2xl">
+                        <div>
+                            <span class="text-[9px] uppercase font-black tracking-widest text-blue-400 block">A* Route Optimization Loop</span>
+                            <h3 class="text-xs font-bold text-slate-900 mt-0.5" id="lbl-driver-route-tag">Sector Assignment Fleet Delta</h3>
+                        </div>
+                        <span id="lbl-driver-progress-counter" class="text-xs font-mono font-bold bg-white px-3 py-1.5 rounded-xl border border-slate-200 text-blue-400 shadow-inner">1 / 2 Done</span>
+                    </div>
+
+                    <!-- MACHINE LEARNING ML INTERACTIVE DYNAMIC ENGINE SWITCH TOGGLE FEATURE -->
+                    <div class="glass-panel bg-slate-50/90 rounded-xl p-3 flex items-center justify-between border border-slate-900">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm">🔮</span>
+
+                            <div>
+                                <h4 class="text-[11px] font-bold text-slate-700 leading-tight">Waste Hotspot Prediction</h4>
+                                <p class="text-[9px] text-slate-500 mt-0.5">Forecast fill patterns via historic data cycles</p>
+                            </div>
+                        </div>
+                        <!-- Toggle Form Switch Checkbox Element Input Button Object -->
+                        <label class="relative inline-flex items-center cursor-pointer select-none">
+                            <input type="checkbox" id="toggle-ml-hotspots" onchange="togglePredictiveHotspotsLayer(this.checked)" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600 peer-checked:after:bg-white peer-checked:after:border-transparent"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div></div> <!-- Grid Spacer Spacer Core Block Segment -->
+            </div>
+
+            <!-- Glove-Friendly High-Contrast Dynamic Interactive Bottom Task Operations Console Tray Sheet Panel -->
+            <div id="driver-console-panel" class="bg-slate-50 border-t border-slate-900 p-5 space-y-4 z-10">
+                <div class="flex items-center gap-3">
+
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg text-blue-400 shrink-0 shadow-inner">🚛</div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 text-[9px] font-extrabold tracking-wider bg-rose-500/10 text-rose-400 rounded border border-rose-500/20 uppercase">Pending Collection</span>
+                            <span class="text-[9px] text-slate-500 font-mono" id="lbl-driver-job-time">Assigned 1h ago</span>
+                        </div>
+                        <h4 id="lbl-driver-job-title" class="font-black text-sm text-slate-900 truncate mt-1">Bio-Waste Overflow</h4>
+                        <p id="lbl-driver-job-address" class="text-xs text-slate-400 truncate mt-0.5">122 Oak Street (Zone Route Fleet Delta)</p>
+                    </div>
+                </div>
+
+                <!-- Dynamic Proof-of-Collection Verification Upload Card Attachment Module Anchor -->
+                <div class="bg-white/50 p-3 rounded-xl border border-slate-900 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center text-xs text-slate-500 font-bold" id="box-driver-evidence-thumb">📷</div>
+                    <div>
+                        <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest block leading-none">Citizen Documentation Proof</span>
+                        <p id="lbl-driver-job-desc" class="text-xs text-slate-600 mt-1 leading-normal font-medium">Overflowing trash receptacle corridor completely blocking pedestrian crossing grids safety arrays paths.</p>
+                    </div>
+                </div>
+
+
+                <!-- Immersive Custom Input Range Swipe Track Confirm System Control Layout -->
+                <div class="relative bg-white p-1.5 rounded-full border border-slate-200 flex items-center h-16 select-none overflow-hidden shadow-inner">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none text-[10px] font-black tracking-widest text-slate-500 uppercase pl-10">
+                        Slide Right to Complete Pickup
+                    </div>
+                    <input type="range" min="0" max="100" value="0" id="ops-swipe-confirm-slider" oninput="processOperationsSwipeValidation(this)" class="w-full h-full appearance-none bg-transparent outline-none relative z-10 cursor-pointer">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Central System Management Architecture Reactive State Logic Controller Script Pipeline -->
+    <script src="assets/app.js"></script>
+</body>
+</html>
